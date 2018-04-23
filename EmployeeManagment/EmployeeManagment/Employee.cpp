@@ -9,11 +9,22 @@ Employee::Employee()
 {
 }
 
-Employee::Employee(std::string first, std::string last) : first_name_(first), last_name_(last)
+
+//
+// If true is passed in the consructor the user will be prompted to provide data for the Employee object.
+Employee::Employee(bool get_from_user)
 {
+	if (get_from_user)
+	{
+		SetFirstNameByUser();
+		SetManagerByUser();
+	}
 }
 
-Employee::Employee(std::string first, std::string last, std::string manager) : first_name_(first), last_name_(last), manager_(manager)
+
+//
+// Constructor to add hard coded employees
+Employee::Employee(std::string first, std::string manager) : first_name_(first), manager_(manager)
 {
 }
 
@@ -22,35 +33,36 @@ Employee::~Employee()
 {
 }
 
-std::string Employee::GetFullName()
-{
-	return first_name_ + " " + last_name_;
-}
 
+//
+// Getter for first_name_
 std::string Employee::GetFirstName()
 {
 	return first_name_;
 }
 
-std::string Employee::GetLastName()
-{
-	return last_name_;
-}
 
+//
+// Getter for manager_
 std::string Employee::GetManager()
 {
 	return manager_;
 }
 
+
+//
+// Ask console user for First Name
 void Employee::SetFirstNameByUser()
 {
-	std::cout << "Please enter Employee's Name: ";
+	std::cout << "Please enter Employee's First Name: ";
 	std::getline(std::cin, first_name_);
-
 }
 
+
+//
+// Ask console user for Manager Name
 void Employee::SetManagerByUser()
 {
-	std::cout << "Please enter Employee's Managers Name: ";
+	std::cout << "Please enter Employee's Managers Name (If employee is a manager just press enter.):";
 	std::getline(std::cin, manager_);
 }
